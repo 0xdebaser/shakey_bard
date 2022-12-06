@@ -40,9 +40,11 @@ if __name__ == '__main__':
                 if original_text[0:len(twitter_handle)] == twitter_handle:
                     original_text = original_text[len(twitter_handle):].lstrip()
 
+                # generate reply text
                 reply_text = bard.shake_it(original_text).choices[0].text.lstrip()
                 print(f"Reply_text: {reply_text}")
 
+                # follow tweet's author and send reply text
                 client.follow_user(author_id)
                 client.create_tweet(text=reply_text, in_reply_to_tweet_id=original_tweet_id)
 
